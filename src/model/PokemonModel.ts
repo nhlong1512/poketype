@@ -10,3 +10,11 @@ export interface PokemonDetail {
     front_default: string;
   };
 }
+
+export interface PokemonSkillDetail extends PokemonDetail {
+  abilities?: {
+    ability: {
+      name: string;
+    };
+  }[];
+}
