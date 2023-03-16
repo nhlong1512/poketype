@@ -1,5 +1,5 @@
-import { Col, Modal } from "antd";
-import React, { useEffect, useState } from "react";
+import { Modal } from "antd";
+import React, { useState } from "react";
 
 interface Props {
   id: number;
