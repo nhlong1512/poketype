@@ -13,10 +13,6 @@ const App: React.FC = () => {
   const [pokemons, setPokemons] = useState<PokemonDetail[]>([]);
   const [nextUrl, setNextUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [detail, setDetail] = useState({
-    id: 0,
-    isOpened: false,
-  })
 
   const getPokemon = async (url: string) => {
     setLoading(true);
@@ -44,7 +40,7 @@ const App: React.FC = () => {
           <header className="text-[#81b29a] tracking-[0.25rem] font-[600] text-[40px] text-center">
             Pokemon
           </header>
-          <PokemonColection pokemons={pokemons} detail = {detail} setDetail = {setDetail} />
+          <PokemonColection pokemons={pokemons}/>
           <div className="flex justify-center items-center flex-col">
             <ConfigProvider
               theme={{
@@ -56,7 +52,7 @@ const App: React.FC = () => {
               <Button
                 type="primary"
                 disabled={loading}
-                className="py-[10px] px-[20px] text-[#3d405b] text-[1.5rem] rounded-[16px] my-[20px] leading-[2rem] h-auto font-[500]"
+                className="py-[10px] px-[20px] text-[#3d405b] text-[20px] rounded-[16px] my-[20px] leading-[2rem] h-auto font-[700]"
                 onClick={onLoadMore}
               >
                 {loading ? `Loading` : `Load More...`}

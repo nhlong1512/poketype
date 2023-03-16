@@ -1,4 +1,4 @@
-import { Modal } from "antd";
+import { Col, Modal } from "antd";
 import React, { useEffect, useState } from "react";
 
 interface Props {
@@ -12,30 +12,14 @@ interface Props {
         };
       }[]
     | undefined;
-  detail: {
-    id: number;
-    isOpened: boolean;
-  };
-  setDetail: React.Dispatch<
-    React.SetStateAction<{
-      id: number;
-      isOpened: boolean;
-    }>
-  >;
 }
 
 const PokemonCard: React.FC<Props> = ({
   id,
   name,
   image,
-  abilities,
-  detail,
-  setDetail,
+  abilities
 }) => {
-  const [isSelected, setIsSelected] = useState<boolean>(false);
-  useEffect(() => {
-    setIsSelected(id === detail?.id);
-  }, [detail]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -48,8 +32,25 @@ const PokemonCard: React.FC<Props> = ({
   };
 
   return (
-    <div>
-      {isSelected ? (
+    <div className="hover:cursor-pointer w-[100%] sm:w-auto">
+        <div
+          className="bg-[#f4f1de] p-2 my-2 rounded-[12px] flex justify-center items-center flex-col md:w-[154px] mx-[10px]"
+          onClick={showModal}
+        >
+          <p
+            className="text-[24px] font-[700] text-[#3d405b] m-0"
+            style={{
+              maxWidth: "100%",
+              whiteSpace: "nowrap",
+              display: "inline-block",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            {name}
+          </p>
+          <img src={image} alt={name} />
+        </div>
         <Modal
           open={isModalOpen}
           onCancel={handleCancel}
@@ -89,38 +90,6 @@ const PokemonCard: React.FC<Props> = ({
             </div>
           </div>
         </Modal>
-      ) : (
-        <div
-          className="bg-[#f4f1de] p-2 my-2 rounded-[12px] flex justify-center items-center flex-col w-[154px] mx-[10px]"
-          onClick={showModal}
-        >
-          <p
-            className="text-[24px] font-[700] text-[#3d405b] m-0"
-            style={{
-              maxWidth: "100%",
-              whiteSpace: "nowrap",
-              display: "inline-block",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-          >
-            {name}
-          </p>
-          <img src={image} alt={name} />
-          {/* <p>
-        Abilities:
-        {abilities?.map((ability) => {
-          return (
-            <div>
-              <span className="text-[#3d405b] font-[500]">
-                {ability.ability.name}
-              </span>
-            </div>
-          );
-        })}
-      </p> */}
-        </div>
-      )}
     </div>
   );
 };
